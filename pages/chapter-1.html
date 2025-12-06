@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Глава 1: Начало путешествия | Око Мира</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/chapter.css">
+</head>
+<body class="chapter-page">
+    <!-- Кнопка возврата на карту (слева) -->
+    <a href="./map.html" class="side-button chapter-back-button" id="backButton">
+        <img src="../assets/images/ui/arrow.png" alt="Карта" class="button-icon">
+        <span class="button-text">Карта</span>
+    </a>
+
+    <!-- Меню (справа) -->
+    <div class="menu-container">
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">
+            <img src="../assets/images/ui/burger.png" alt="" class="menu-icon burger-icon">
+            <img src="../assets/images/ui/close.png" alt="" class="menu-icon close-icon">
+        </button>
+
+        <div class="menu-slide" id="menuSlide">
+            <nav class="menu-nav">
+                <button class="menu-nav-item" id="settingsButton">Настройки</button>
+                <a href="#" class="menu-nav-item">Скачать артбук</a>
+            </nav>
+
+            <div class="settings-panel" id="settingsPanel">
+                <div class="setting-group">
+                    <h3 class="setting-title">Текст</h3>
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <div class="slider-thumb" id="fontSliderThumb"></div>
+                            <div class="slider-marker" data-value="1"></div>
+                            <div class="slider-marker" data-value="2"></div>
+                            <div class="slider-marker" data-value="3"></div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>Меньше</span>
+                            <span>Стандарт</span>
+                            <span>Больше</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <div class="text-preview">
+                        <h4 class="preview-title">Пример</h4>
+                        <p class="preview-text">Наше дело не так однозначно, как может показаться: граница обучения кадров является качественно новой ступенью.</p>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3 class="setting-title">Звук</h3>
+                    <div class="toggle-container">
+                        <span class="toggle-label" id="soundLabel">Включен</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="soundToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <main class="chapter-content">
+        <!-- Заголовок главы -->
+        <header class="chapter-header">
+            <h1 class="chapter-title">Начало путешествия</h1>
+        </header>
+
+        <!-- Текст главы -->
+        <div class="chapter-text">
+            <!-- Заголовок Глава 1 -->
+            <h2 class="chapter-subtitle">Глава 1</h2>
+            
+            <!-- Текст абзацами -->
+            <div class="text-content">
+                <p>Время от времени дворец подрагивал, словно сама земля содрогалась от воспоминаний и тяжко вздыхала, не желая поверить в случившееся. Солнечные лучи, прорываясь сквозь трещины в стенах, выхватывали клубившуюся еще в воздухе пыль. Выжженные отметины пятнали стены, полы, потолки. На вспучившихся красках и позолоте когда-то ярких фресок виднелись широкие черные мазки, хлопья сажи покрывали тела людей и животных, так и не сумевших убежать от настигающего их безумия. Мертвые лежали повсюду: мужчины, женщины, дети, — искавшие спасения, когда в них из каждого коридора ударили молнии, когда их объяло подкравшееся сзади пламя, когда под их ногами потекли каменные плиты дворца, в которых они тонули еще живыми, — потом воцарилось безмолвие. Но, в странном контрасте с окружающим, неповрежденными остались многоцветные гобелены, сохранились фрески. Лишь там, где стены покосились, творения художников были попорчены. Мебель с превосходными резными узорами, отделанная золотом и драгоценной костью, стояла на прежних местах, только кое-где застывший волнами пол опрокинул стулья. Удар, поразивший разум и скрутивший рассудок, был нанесен точно в цель, не задев роскошную обстановку.</p>
+                
+                <p>Льюс Тэрин Теламон бродил по дворцу, ловко удерживая равновесие, когда пол под ногами вздрагивал.</p>
+                
+                <p>— Илиена! Любовь моя, где ты?</p>
+                
+                <p>Светло-серый плащ его потянул за собой кровавый след, когда Льюс Тэрин Теламон перешагнул через тело золотоволосой женщины; черты ее красивого лица были искажены ужасом последнего мгновения жизни, а открытые глаза застыли в неверии.</p>
+                
+                <p>— Где ты, жена моя? Куда все попрятались?</p>
+                
+                <p>В покосившемся зеркале на обожженном мраморе стены взор человека уловил его собственное отражение. Королевские одежды серого, алого и золотого цветов, — одеяние, некогда великолепное, из редкой ткани, привезенной купцами из-за Мирового Моря, а теперь рваное и запачканное, — было запорошено пылью, покрывавшей и лицо, и волосы. На мгновение рука мужчины коснулась эмблемы на плаще — черно-белый круг, цвета которого серого, алого и золотого цветов, — одеяние, некогда великолепное, из редкой ткани, привезенной купцами из-за Мирового Моря, а теперь рваное и запачканное, — было запорошено пылью, покрывавшей и лицо, и волосы. На мгновение рука мужчины коснулась эмблемы на плаще — черно-белый круг, цвета которого</p>
+                
+                <p>серого, алого и золотого цветов, — одеяние, некогда великолепное, из редкой ткани, привезенной купцами из-за Мирового Моря, а теперь рваное и запачканное, — было запорошено пылью, покрывавшей и лицо, и волосы. На мгновение рука мужчины коснулась эмблемы на плаще — черно-белый круг, цвета которого</p>
+                
+                <p>Льюс Тэрин продолжал бродить по разрушенным залам, его шаги эхом отдавались в пустых коридорах. Каждый угол, каждая комната напоминали ему о том, что было потеряно. Воздух был наполнен запахом гари и пыли, смешанным с едва уловимым ароматом увядших цветов из сада, который когда-то цвел под окнами королевских покоев.</p>
+            </div>
+
+            <!-- Иллюстрация после текста -->
+            <div class="illustration-block">
+                <img src="../assets/images/chapters/drawing.png" alt="Иллюстрация к главе" class="chapter-illustration">
+            </div>
+
+            <!-- Глава 2 -->
+            <h2 class="chapter-subtitle">Глава 2</h2>
+            
+            <!-- Текст главы 2 -->
+            <div class="text-content">
+                <p>Время от времени дворец подрагивал, словно сама земля содрогалась от воспоминаний и тяжко вздыхала, не желая поверить в случившееся. Солнечные лучи, прорываясь сквозь трещины в стенах, выхватывали клубившуюся еще в воздухе пыль. Выжженные отметины пятнали стены, полы, потолки.</p>
+                
+                <p>Льюс Тэрин Теламон бродил по дворцу, ловко удерживая равновесие, когда пол под ногами вздрагивал. — Илиена! Любовь моя, где ты? Светло-серый плащ его потянул за собой кровавый след, когда Льюс Тэрин Теламон перешагнул через тело золотоволосой женщины; черты ее красивого лица были искажены ужасом последнего мгновения жизни, а открытые глаза застыли в неверии.</p>
+            </div>
+            
+            <!-- Иллюстрация для главы 2 -->
+            <div class="illustration-block">
+                <img src="../assets/images/chapters/drawing2.png" alt="Иллюстрация к главе 2" class="chapter-illustration">
+            </div>
+        </div>
+
+        <!-- Навигация -->
+        <div class="chapter-navigation">
+            <button class="nav-button back-to-top" id="backToTop">
+                <img src="../assets/images/ui/arrow.png" style="rotate: 90deg;" alt="Наверх">
+                <span>Наверх</span>
+            </button>
+            <a href="./chapter-2.html" class="nav-button continue-button">
+                <span>Продолжить</span>
+                <img src="../assets/images/ui/arrow.png"style="rotate: 180deg;" c alt="Продолжить">
+            </a>
+        </div>
+    </main>
+
+    <!-- Скрипты -->
+    <script src="../js/storage.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/chapter.js"></script>
+</body>
+</html>

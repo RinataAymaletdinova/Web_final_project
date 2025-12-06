@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта | Око Мира</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/menu.css">
+    <link rel="stylesheet" href="../css/map.css">
+</head>
+<body class="map-page">
+    <!-- Карта -->
+    <div class="map-container" id="mapContainer">
+        <div class="map-wrapper" id="mapWrapper">
+            <div class="map-image" id="mapImage"></div>
+            
+            <!-- Контейнер для маркеров -->
+            <div class="map-markers" id="mapMarkers">
+                <!-- Точки интереса -->
+                <div class="point-of-interest" style="top: 30%; left: 40%;" data-id="1">
+                    <div class="poi-dot"></div>
+                    <div class="poi-tooltip">
+                        <h3>Эмондов луг</h3>
+                        <p>Наше дело не так однозначно, как может показаться: граница обучения кадров является качественно новой ступенью направлений.</p>
+                    </div>
+                </div>
+                
+                <div class="point-of-interest" style="top: 50%; left: 60%;" data-id="2">
+                    <div class="poi-dot"></div>
+                    <div class="poi-tooltip">
+                        <h3>Белая Башня</h3>
+                        <p>Центр власти Аes Sedai, где обучаются женщины, способные направлять Единую Силу.</p>
+                    </div>
+                </div>
+                
+                <!-- События -->
+                <div class="event-marker" style="top: 35%; left: 45%;" data-event-id="1">
+                    <div class="event-icon"></div>
+                    <div class="event-tooltip">Начало путешествия</div>
+                </div>
+            </div>
+            
+            <!-- Пути героев -->
+            <div class="paths-overlay">
+                <svg class="paths-svg" id="pathsSvg"></svg>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кнопка Главная (слева) -->
+    <a href="../index.html" class="side-button home-button" id="homeButton">
+        <img src="../assets/images/ui/arrow.png" alt="Главная" class="button-icon">
+        <span class="button-text">Главная</span>
+    </a>
+
+    <!-- Кнопки в левом нижнем углу -->
+    <div class="bottom-buttons-container">
+        <!-- Контейнер для кнопки "Путь героев" -->
+        <div class="bottom-button-wrapper">
+            <button class="bottom-button path-button" id="pathButton">
+                <img src="../assets/images/map/legend/path.png" alt="Путь" class="button-icon">
+                <span class="button-text">Путь героев</span>
+            </button>
+            
+            <!-- Окно "Путь героев" -->
+            <div class="bottom-modal-slide paths-modal" id="pathsModal">
+                <!-- Заголовок больше не нужен, так как кнопка стала заголовком -->
+                <div class="paths-list">
+                    <label class="path-checkbox" data-character="rand">
+                        <input type="checkbox" name="character" value="rand">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Ранд</span>
+                    </label>
+                    
+                    <label class="path-checkbox" data-character="perrin">
+                        <input type="checkbox" name="character" value="perrin">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Перрин</span>
+                    </label>
+                    
+                    <label class="path-checkbox" data-character="mat">
+                        <input type="checkbox" name="character" value="mat">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Мэт</span>
+                    </label>
+                    
+                    <label class="path-checkbox" data-character="moiraine-lan">
+                        <input type="checkbox" name="character" value="moiraine-lan">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Морейн и Лан</span>
+                    </label>
+                    
+                    <label class="path-checkbox" data-character="egwene">
+                        <input type="checkbox" name="character" value="egwene">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Эгвейн</span>
+                    </label>
+                    
+                    <label class="path-checkbox" data-character="nynaeve">
+                        <input type="checkbox" name="character" value="nynaeve">
+                        <span class="checkmark"></span>
+                        <span class="path-name">Найнив</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Контейнер для кнопки "Обозначения" -->
+        <div class="bottom-button-wrapper">
+            <button class="bottom-button legend-button" id="legendButton">
+                <img src="../assets/images/map/legend/icons.png" alt="Легенда" class="button-icon">
+                <span class="button-text">Обозначения</span>
+            </button>
+            
+            <!-- Окно "Обозначения" -->
+            <div class="bottom-modal-slide legend-modal" id="legendModal">
+                <!-- Заголовок больше не нужен, так как кнопка стала заголовком -->
+                <div class="legend-list">
+                    <div class="legend-item">
+                        <div class="legend-icon settlements"></div>
+                        <span class="legend-text">Поселения</span>
+                    </div>
+                    
+                    <div class="legend-item">
+                        <div class="legend-icon cities"></div>
+                        <span class="legend-text">Города</span>
+                    </div>
+                    
+                    <div class="legend-item">
+                        <div class="legend-icon battles"></div>
+                        <span class="legend-text">Битвы</span>
+                    </div>
+                    
+                    <div class="legend-item">
+                        <div class="legend-icon events"></div>
+                        <span class="legend-text">События</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Меню (справа) -->
+    <div class="menu-container">
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">
+            <img src="../assets/images/ui/burger.png" alt="" class="menu-icon burger-icon">
+            <img src="../assets/images/ui/close.png" alt="" class="menu-icon close-icon">
+        </button>
+
+        <div class="menu-slide" id="menuSlide">
+            <nav class="menu-nav">
+                <button class="menu-nav-item" id="settingsButton">Настройки</button>
+                <a href="#" class="menu-nav-item">Скачать артбук</a>
+            </nav>
+
+            <div class="settings-panel" id="settingsPanel">
+                <div class="setting-group">
+                    <h3 class="setting-title">Текст</h3>
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <div class="slider-thumb" id="fontSliderThumb"></div>
+                            <div class="slider-marker" data-value="1"></div>
+                            <div class="slider-marker" data-value="2"></div>
+                            <div class="slider-marker" data-value="3"></div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>Меньше</span>
+                            <span>Стандарт</span>
+                            <span>Больше</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <div class="text-preview">
+                        <h4 class="preview-title">Пример</h4>
+                        <p class="preview-text">Наше дело не так однозначно, как может показаться: граница обучения кадров является качественно новой ступенью.</p>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3 class="setting-title">Звук</h3>
+                    <div class="toggle-container">
+                        <span class="toggle-label" id="soundLabel">Включен</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="soundToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Окно события -->
+    <div class="event-modal" id="eventModal">
+        <div class="modal-header">
+            <h2 class="modal-title">
+                Начало путешествия
+                <span class="event-chapters">Главы 1-2</span>
+            </h2>
+            <button class="modal-close" id="closeEventModal">×</button>
+        </div>
+        
+        <div class="event-content">
+            <p class="event-text">
+                Наше дело не так однозначно, как может показаться: граница обучения кадров является качественно новой ступенью направлений прогрессивного развития. Высокий уровень вовлечения представителей целевой аудитории является четким доказательством простого факта: базовый вектор развития представляет собой интересный эксперимент проверки новых предложений.
+            </p>
+            <p class="event-text">
+                Каждый из нас понимает очевидную вещь: высокотехнологичная концепция общественного уклада создаёт предпосылки для анализа существующих паттернов поведения.
+            </p>
+        </div>
+        
+        <a href="../pages/chapter-1.html" class="event-read-button">Читать</a>
+    </div>
+
+    <!-- Скрипты -->
+    <script src="../js/storage.js"></script>
+    <script src="../js/menu.js"></script>
+    <script src="../js/map.js"></script>
+    <script src="../js/map-interaction.js"></script>
+</body>
+</html>

@@ -1,0 +1,764 @@
+/* Страница карты */
+.map-page {
+    overflow: hidden;
+    height: 100vh;
+    background-color: #0a0a0a;
+}
+
+/* Контейнер карты */
+.map-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+}
+
+.map-container.grabbing {
+    cursor: grabbing;
+}
+
+/* Обертка карты */
+.map-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #0a0a0a;
+}
+
+.map-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/images/map/map.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    will-change: transform;
+    min-width: 100%;
+    min-height: 100%;
+    transform-origin: center center;
+}
+
+/* Кнопка Главная (слева) */
+.side-button {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 15px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    z-index: 100;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.side-button:hover {
+    width: 180px;
+    background-color: #2a2a2a;
+}
+
+.side-button:active {
+    background-color: #0a0a0a;
+    transition-duration: 0.1s;
+}
+
+.side-button .button-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+
+.side-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+.side-button .button-text {
+    opacity: 0;
+    margin-left: 15px;
+    transition: opacity 0.3s ease 0.1s;
+}
+
+.side-button:hover .button-text {
+    opacity: 1;
+}
+
+/* Кнопки в левом нижнем углу */
+.bottom-buttons-container {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+/* Контейнер для кнопки и окна */
+.bottom-button-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Кнопка открытия/закрытия (превращается в заголовок) */
+.bottom-button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-left: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 15px;
+    cursor: pointer;
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 1.5rem;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 101;
+}
+
+/* При наведении на закрытую кнопку */
+.bottom-button:hover:not(.active) {
+    width: 200px;
+    background-color: #2a2a2a;
+}
+
+.bottom-button:active {
+    background-color: #0a0a0a;
+    transition-duration: 0.1s;
+}
+
+/* При открытии окна кнопка становится заголовком */
+.bottom-button.active {
+    width: 267px;
+    height: 50px;
+    background-color: #2a2a2a;
+    border-bottom: none;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.bottom-button.active .button-text {
+    opacity: 1;
+    margin-left: 0;
+    font-weight: 700;
+}
+
+.bottom-button.active .button-icon {
+    /* Иконка меняется на стрелку */
+    content: url('../assets/images/ui/arrow.png');
+}
+
+.bottom-button .button-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.bottom-button:hover .button-icon {
+    transform: translateX(5px);
+}
+
+.bottom-button .button-text {
+    opacity: 0;
+    margin-left: 15px;
+    transition: opacity 0.3s ease 0.1s;
+}
+
+.bottom-button:hover .button-text {
+    opacity: 1;
+}
+
+/* Выдвижное окно - появляется над кнопкой */
+.bottom-modal-slide {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 267px;
+    height: 286px; /* 336 - 50 (высота заголовка) */
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    border-bottom: none;
+    border-left: none;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.bottom-button-wrapper.active .bottom-modal-slide {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* При открытии окна поднимаем весь контейнер */
+.bottom-button-wrapper.active {
+    transform: translateY(-400px); /* Поднимаем на высоту окна */
+}
+
+/* Контейнер для маркеров */
+.map-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+    will-change: transform;
+    transform-origin: center center;
+}
+
+/* Точки интереса */
+.point-of-interest {
+    position: absolute;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+    z-index: 11;
+    cursor: pointer;
+}
+
+.poi-dot {
+    width: 24px;
+    height: 24px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+    border: 3px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease;
+}
+
+.point-of-interest:hover .poi-dot {
+    transform: scale(1.3);
+    background-color: #45a049;
+}
+
+.poi-tooltip {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #333;
+    padding: 20px;
+    border-radius: 4px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.point-of-interest:hover .poi-tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: 50px;
+}
+
+.poi-tooltip h3 {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.poi-tooltip p {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 400;
+    line-height: 1.4;
+    color: #ccc;
+}
+
+/* События */
+.event-marker {
+    position: absolute;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    cursor: pointer;
+}
+
+.event-icon {
+    width: 32px;
+    height: 32px;
+    background-image: url('../assets/images/ui/big.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.3s ease;
+}
+
+.event-marker:hover .event-icon {
+    transform: scale(1.2);
+}
+
+.event-tooltip {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    border: 2px solid #333;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1.5rem; /* 24px */
+    color: white;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+.event-marker:hover .event-tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: 60px;
+}
+
+/* Заголовок модального окна - убираем, так как кнопка стала заголовком */
+.bottom-modal-slide .modal-header {
+    display: none;
+}
+
+/* Список путей героев */
+.paths-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.path-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding-left: 35px;
+    font-size: 1.5rem; /* 24px */
+    color: white;
+    user-select: none;
+}
+
+.path-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 24px;
+    width: 24px;
+    background-color: #333;
+    border-radius: 50%;
+    border: 2px solid #555;
+    transition: all 0.3s ease;
+}
+
+/* Цвета для чекбоксов */
+.path-checkbox[data-character="rand"] .checkmark {
+    border-color: #2196F3;
+}
+
+.path-checkbox[data-character="perrin"] .checkmark {
+    border-color: #FF9800;
+}
+
+.path-checkbox[data-character="mat"] .checkmark {
+    border-color: #4CAF50;
+}
+
+.path-checkbox[data-character="moiraine-lan"] .checkmark {
+    border-color: #9C27B0;
+}
+
+.path-checkbox[data-character="egwene"] .checkmark {
+    border-color: #FF5722;
+}
+
+.path-checkbox[data-character="nynaeve"] .checkmark {
+    border-color: #FFC107;
+}
+
+.path-checkbox:hover input ~ .checkmark {
+    background-color: #444;
+}
+
+.path-checkbox input:checked ~ .checkmark {
+    border-width: 3px;
+}
+
+.path-checkbox[data-character="rand"] input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.path-checkbox[data-character="perrin"] input:checked ~ .checkmark {
+    background-color: #FF9800;
+}
+
+.path-checkbox[data-character="mat"] input:checked ~ .checkmark {
+    background-color: #4CAF50;
+}
+
+.path-checkbox[data-character="moiraine-lan"] input:checked ~ .checkmark {
+    background-color: #9C27B0;
+}
+
+.path-checkbox[data-character="egwene"] input:checked ~ .checkmark {
+    background-color: #FF5722;
+}
+
+.path-checkbox[data-character="nynaeve"] input:checked ~ .checkmark {
+    background-color: #FFC107;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.path-checkbox input:checked ~ .checkmark:after {
+    display: block;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+}
+
+.path-name {
+    margin-left: 10px;
+}
+
+/* Окно "Обозначения" */
+.legend-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.legend-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.legend-icon.settlements {
+    background-image: url('../assets/images/map/legend/settlements.png');
+}
+
+.legend-icon.cities {
+    background-image: url('../assets/images/map/legend/cities.png');
+}
+
+.legend-icon.battles {
+    background-image: url('../assets/images/map/legend/battles.png');
+}
+
+.legend-icon.events {
+    background-image: url('../assets/images/map/legend/events.png');
+}
+
+.legend-text {
+    font-size: 1.5rem; /* 24px */
+    color: white;
+}
+
+/* Окно события (справа внизу) */
+.event-modal {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 565px;
+    height: 716px;
+    background-color: #1a1a1a;
+    border: 2px solid #333;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.event-modal.active {
+    display: flex;
+}
+
+.event-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.event-modal .modal-title {
+    font-size: 1.8rem; /* 32px */
+    align-items: end;
+    justify-content: right;
+
+
+}
+
+.modal-close{
+    font-size: 2rem;
+    background-color: #1a1a1a;
+    border: #444;
+    border-radius: 1px;
+    color: white;
+}
+
+.event-chapters {
+    font-size: 1.2rem; /* 24px */
+    color: #999;
+    font-weight: 700;
+}
+
+.event-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.event-text {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 400;
+    line-height: 1.5;
+    color: #ccc;
+    margin-bottom: 20px;
+}
+
+.event-read-button {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1.5rem; /* 24px */
+    font-family: 'Georgia', serif;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.event-read-button:hover {
+    background-color: #2a2a2a;
+    border-color: #555;
+}
+
+.event-read-button:active {
+    background-color: #0a0a0a;
+    transition-duration: 0.1s;
+}
+
+/* Пути героев на карте */
+.paths-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    will-change: transform;
+    transform-origin: center center;
+}
+
+.paths-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.path-line {
+    fill: none;
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0.8;
+    pointer-events: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.path-line.rand {
+    stroke: #2196F3;
+}
+
+.path-line.perrin {
+    stroke: #FF9800;
+}
+
+.path-line.mat {
+    stroke: #4CAF50;
+}
+
+.path-line.moiraine-lan {
+    stroke: #9C27B0;
+}
+
+.path-line.egwene {
+    stroke: #FF5722;
+}
+
+.path-line.nynaeve {
+    stroke: #FFC107;
+}
+
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .event-modal {
+        width: 500px;
+        height: 600px;
+    }
+    
+    .bottom-modal-slide {
+        width: 250px;
+        height: 260px;
+    }
+    
+    .bottom-button.active {
+        width: 250px;
+    }
+    
+    .bottom-button-wrapper.active {
+        transform: translateY(-260px);
+    }
+}
+
+@media (max-width: 768px) {
+    .side-button {
+        top: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .bottom-buttons-container {
+        bottom: 20px;
+    }
+    
+    .bottom-button {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .bottom-button:hover:not(.active) {
+        width: 150px;
+    }
+    
+    .bottom-modal-slide {
+        width: 220px;
+        height: 230px;
+    }
+    
+    .bottom-button.active {
+        width: 220px;
+        height: 45px;
+    }
+    
+    .bottom-button-wrapper.active {
+        transform: translateY(-230px);
+    }
+    
+    .event-modal {
+        width: calc(100% - 40px);
+        height: 500px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .poi-tooltip {
+        width: 250px;
+        font-size: 1.2rem;
+    }
+    
+    .poi-tooltip h3,
+    .poi-tooltip p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-modal {
+        width: calc(100% - 20px);
+        height: 400px;
+        padding: 20px;
+    }
+    
+    .bottom-modal-slide {
+        width: 200px;
+        height: 210px;
+        padding: 15px;
+    }
+    
+    .bottom-button.active {
+        width: 200px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+    
+    .bottom-button-wrapper.active {
+        transform: translateY(-210px);
+    }
+    
+    .legend-text,
+    .path-name {
+        font-size: 1.2rem;
+    }
+}

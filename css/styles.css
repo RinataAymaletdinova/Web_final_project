@@ -1,0 +1,77 @@
+/* Сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    color: #fff;
+    background-color: #d1d1c3;
+}
+
+/* 12-колоночная сетка для десктопа */
+.grid-container {
+    width: 100%;
+    max-width: calc(1920px - 160px); /* 80px margin с каждой стороны */
+    margin: 0 auto;
+    padding: 0 80px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 32px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Адаптивность */
+@media (max-width: 1440px) {
+    .grid-container {
+        padding: 0 60px;
+        gap: 28px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .grid-container {
+        padding: 0 40px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .grid-container {
+        padding: 0 24px;
+        gap: 20px;
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .grid-container {
+        padding: 0 16px;
+        gap: 16px;
+    }
+}
+
+/* Утилиты */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}

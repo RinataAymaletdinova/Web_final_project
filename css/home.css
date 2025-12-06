@@ -1,0 +1,147 @@
+/* Параллакс-контейнер */
+.parallax-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    background-position: center;
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+}
+
+
+.layer-middle {
+    background-image: url('../assets/images/parallax/layer-middle.png');
+}
+
+.layer-front {
+    background-image: url('../assets/images/parallax/layer-front.png');
+}
+
+/* Основной контент */
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-column: 1 / -1;
+}
+
+.title-section {
+    margin-bottom: 15vh;
+}
+
+.main-title {
+    font-size: 13.4375rem; /* 215px /16 */
+    font-weight: 700;
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+}
+
+.subtitle {
+    font-size: 3rem; /* 48px */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    opacity: 0.95;
+}
+
+.cycle {
+    font-size: 2rem; /* 32px */
+    opacity: 0.8;
+}
+
+/* Кнопка "Начать" */
+.start-button {
+    display: inline-block;
+    padding: 1.5rem 4rem;
+    background-color: #1a1a1a;
+    color: white;
+    font-size: 1.5rem; /* 24px */
+    font-family: 'Georgia', serif;
+    text-decoration: none;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 200px;
+}
+
+.start-button:hover {
+    background-color: #2a2a2a;
+    border-color: #555;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.start-button:active {
+    background-color: #0a0a0a;
+    transform: translateY(0);
+    transition-duration: 0.1s;
+}
+
+/* Адаптивность текста */
+@media (max-width: 1200px) {
+    .main-title {
+        font-size: 10rem;
+    }
+    
+    .subtitle {
+        font-size: 2.5rem;
+    }
+    
+    .cycle {
+        font-size: 1.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.8rem;
+    }
+    
+    .cycle {
+        font-size: 1.3rem;
+    }
+    
+    .title-section {
+        margin-bottom: 10vh;
+    }
+    
+    .start-button {
+        padding: 1.2rem 3rem;
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 3.5rem;
+    }
+    
+    .subtitle {
+        font-size: 1.4rem;
+    }
+    
+    .cycle {
+        font-size: 1rem;
+    }
+}

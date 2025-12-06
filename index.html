@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Око Мира | Интерактивная карта</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+<body>
+    <!-- Контейнер для параллакс-слоев -->
+    <div class="parallax-container">
+        <div class="parallax-layer layer-back"></div>
+        <div class="parallax-layer layer-middle"></div>
+        <div class="parallax-layer layer-front"></div>
+    </div>
+
+    <!-- Основное содержимое -->
+    <main class="main-content grid-container">
+        <div class="title-section">
+            <h1 class="main-title">Око Мира</h1>
+            <p class="subtitle">Интерактивная карта по книге<br>Роберта Джордана</p>
+            <p class="cycle">Из цикла «Колесо Времени»</p>
+        </div>
+
+        <a href="./pages/map.html" class="start-button" id="startButton">Начать</a>
+    </main>
+
+    <!-- Бургер-меню -->
+    <div class="menu-container">
+        <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">
+            <img src="./assets/images/ui/burger.png" alt="" class="menu-icon burger-icon">
+            <img src="./assets/images/ui/close.png" alt="" class="menu-icon close-icon">
+        </button>
+
+        <div class="menu-slide" id="menuSlide">
+            <nav class="menu-nav">
+                <button class="menu-nav-item" id="settingsButton">Настройки</button>
+                <a href="#" class="menu-nav-item">Скачать артбук</a>
+            </nav>
+
+            <!-- Панель настроек (скрыта по умолчанию) -->
+            <div class="settings-panel" id="settingsPanel">
+                <div class="setting-group">
+                    <h3 class="setting-title">Текст</h3>
+                    <div class="slider-container">
+                        <div class="slider-track">
+                            <div class="slider-thumb" id="fontSliderThumb"></div>
+                            <div class="slider-marker" data-value="1"></div>
+                            <div class="slider-marker" data-value="2"></div>
+                            <div class="slider-marker" data-value="3"></div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>Меньше</span>
+                            <span>Стандарт</span>
+                            <span>Больше</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <div class="text-preview">
+                        <h4 class="preview-title">Пример</h4>
+                        <p class="preview-text">Наше дело не так однозначно, как может показаться: граница обучения кадров является качественно новой ступенью. Наше дело не так однозначно, как может показаться</p>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <h3 class="setting-title">Звук</h3>
+                    <div class="toggle-container">
+                        <span class="toggle-label" id="soundLabel">Включен</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="soundToggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение скриптов -->
+    <script src="./js/storage.js"></script>
+    <script src="./js/menu.js"></script>
+    <script src="./js/parallax.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
