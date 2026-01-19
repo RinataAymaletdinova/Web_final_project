@@ -1,3 +1,4 @@
-Ссылка: https://rinataaymaletdinova.github.io/Web_final_project/pages/map.html
+Ссылка: https://rinataaymaletdinova.github.io/Web_final_project/index.html
 Сайт - электронная книга с интерактивной картой
 В разработке использовался DeepSeek
+
